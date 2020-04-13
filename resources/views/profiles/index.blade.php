@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-3 p-5">
-            <img src="{{ asset( $users->profile->image ) }}" height="160" alt="profile image" class="rounded-circle">
+            <img src="{{ asset( $users->profile->profilePicture() ) }}" height="160" alt="profile image" class="rounded-circle">
         </div>
         <div class="col-md-8 pt-5">
             <div class="d-flex justify-content-between align-items-baseline">

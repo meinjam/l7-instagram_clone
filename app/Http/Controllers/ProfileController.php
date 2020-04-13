@@ -41,11 +41,13 @@ class ProfileController extends Controller
             $uploadPath = 'img/profilepic/';
             $imageURL = $uploadPath . $imageFullName;
             Image::make($image)->fit(600, 600)->save($imageURL);
+
+            $imageArray = ['image' => $imageURL];
         }
 
         auth()->user()->profile->update(array_merge(
             $data,
-            ['image' => $imageURL]
+            $imageArray ?? []
         ));
         return redirect("/profile/{$user->id}");
     }

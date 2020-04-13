@@ -11,6 +11,11 @@ class Profile extends Model
         'user_id', 'title', 'description', 'url', 'image',
     ];
 
+    public function profilePicture()
+    {
+        return ($this->image) ? $this->image : 'img/profilepic/user.jpg';
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
