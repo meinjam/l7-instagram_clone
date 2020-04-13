@@ -6,13 +6,14 @@ use Auth;
 use App\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index()
     {
@@ -42,16 +43,17 @@ class PostController extends Controller
         $imageFullName = $imageName. '.' .$extension;
         $uploadPath = 'img/postsimg/';
         $imageURL = $uploadPath . $imageFullName;
-        $success = $image->move($uploadPath, $imageFullName);
+        Image::make($image)->fit(600, 600)->save($imageURL);
         $post['image'] = $imageURL;
 
         $post->save();
         return redirect('/profile/' . Auth::id());
     }
 
-    public function show($id)
+    public function show($post)
     {
-        //
+        $postt = Post::findOrFail($post);
+        return view('posts.show', compact('postt'));
     }
 
     public function edit($id)
